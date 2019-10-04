@@ -8,10 +8,7 @@ public class Minesweaper {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		 // from input.txt Assumes java Minesweaper < input.txt > output.txt
-		 
 		ArrayList<char[][]> fields = loadPage();
-
 		ArrayList<char[][]> solutions = new ArrayList<char[][]>();
 
 		for (int i = 0; i < fields.size(); i++) {
@@ -24,10 +21,10 @@ public class Minesweaper {
 			print(System.out, solution);
 			System.out.println();
 		}
-
 	}
 
 	public static int adjCell(char[][] feild, int n, int m) {
+		
 		if (feild.length <= n || feild[0].length <= m)
 			return 0;
 
@@ -39,16 +36,15 @@ public class Minesweaper {
 	}
 
 	public static int calcNum(char[][] feild, int n, int m) {
+		
 		int num = 0;
 
 		num += adjCell(feild, n - 1, m);
 		num += adjCell(feild, n - 1, m - 1);
 		num += adjCell(feild, n - 1, m + 1);
-
 		num += adjCell(feild, n + 1, m);
 		num += adjCell(feild, n + 1, m + 1);
 		num += adjCell(feild, n + 1, m - 1);
-
 		num += adjCell(feild, n, m + 1);
 		num += adjCell(feild, n, m - 1);
 
@@ -56,29 +52,29 @@ public class Minesweaper {
 	}
 
 	public static char[][] calculate(char[][] feild) {
+		
 		char[][] solution = new char[feild.length][feild[0].length];
 
 		for (int row = 0; row < feild.length; row++) {
 
 			for (int col = 0; col < feild[row].length; col++) {
+				
 				if (feild[row][col] == '*') {
 					solution[row][col] = '*';
 					continue;
 				}
+				
 				int c = calcNum(feild, row, col);
-
 				solution[row][col] = (c + "").charAt(0);
 			}
-
 		}
 
 		return solution;
 	}
 
 	public static ArrayList<char[][]> loadPage() throws FileNotFoundException {
+		
 		ArrayList<char[][]> list = new ArrayList<char[][]>();
-
-		// Scanner inputFile = new Scanner(new File(fileName));
 		Scanner inputFile = new Scanner(System.in);
 
 		while (inputFile.hasNext()) {
@@ -89,19 +85,16 @@ public class Minesweaper {
 				break;
 
 			inputFile.nextLine();
-
 			char[][] temp = loadFeild(inputFile, n, m);
-
 			list.add(temp);
 		}
 
 		inputFile.close();
-
 		return list;
 	}
 
 	public static char[][] loadFeild(Scanner inputFile, int n, int m) {
-		// create n by m array(feild)
+		
 		char[][] feild = new char[n][m];
 
 		for (int row = 0; row < n; row++) {
@@ -109,7 +102,6 @@ public class Minesweaper {
 
 			for (int col = 0; col < m; col++) {
 				feild[row][col] = line.charAt(col); // read next char & save it into feild[][]
-
 			}
 		}
 
@@ -117,15 +109,14 @@ public class Minesweaper {
 	}
 
 	public static void print(PrintStream stream, char[][] feild) {
+		
 		for (int row = 0; row < feild.length; row++) {
 
 			for (int col = 0; col < feild[row].length; col++) {
 				stream.print(feild[row][col]);
 			}
-
+			
 			stream.println();
 		}
-
 	}
-
 }
