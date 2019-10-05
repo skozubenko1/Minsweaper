@@ -1,9 +1,9 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// svetlana kozubenko
 public class Minesweaper {
 
 	public static void main(String[] args) throws FileNotFoundException {
@@ -82,8 +82,11 @@ public class Minesweaper {
 			int m = inputFile.nextInt(10);
 
 			if (n == 0 || m == 0)
+				continue;
+			
+			if (n == 0 && m ==0)
 				break;
-
+			
 			inputFile.nextLine();
 			char[][] temp = loadFeild(inputFile, n, m);
 			list.add(temp);
@@ -92,6 +95,7 @@ public class Minesweaper {
 		inputFile.close();
 		return list;
 	}
+	
 
 	public static char[][] loadFeild(Scanner inputFile, int n, int m) {
 		
